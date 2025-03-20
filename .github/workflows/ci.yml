@@ -23,3 +23,16 @@ jobs:
 
       - name: Save Logs
         run: cat /var/log/syslog > cicd_logs.txt || echo "Log collection failed"
+
+      - name: Collect Build Logs
+        run: |
+          mkdir -p logs
+          dmesg > logs/build_log.txt
+
+      - name: Upload Logs
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-logs
+          path: logs/build_log.txt
+    
+   
