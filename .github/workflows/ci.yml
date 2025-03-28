@@ -22,7 +22,7 @@ jobs:
         run: python -m unittest discover -s tests || echo "No tests"
 
       - name: Save Logs
-        run: cat /var/log/syslog > cicd_logs.txt || echo "Log collection failed"
+        run: dmesg > cicd_logs.txt || echo "Log collection failed"
 
       - name: Collect Build Logs
         run: |
@@ -34,5 +34,3 @@ jobs:
         with:
           name: build-logs
           path: logs/build_log.txt
-    
-   
