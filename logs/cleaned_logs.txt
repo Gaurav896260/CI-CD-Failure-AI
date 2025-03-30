@@ -1,0 +1,29 @@
+fv-az1913-310 kernel: RAS: Correctable Errors collector initialized.
+fv-az1913-310 (udev-worker)[257]: sda: Process '/usr/bin/unshare -m /usr/bin/snap auto-import --mount=/dev/sda' failed with exit code 1.
+fv-az1913-310 (udev-worker)[261]: sdb: Process '/usr/bin/unshare -m /usr/bin/snap auto-import --mount=/dev/sdb' failed with exit code 1.
+fv-az1913-310 (udev-worker)[272]: sda16: Process '/usr/bin/unshare -m /usr/bin/snap auto-import --mount=/dev/sda16' failed with exit code 1.
+fv-az1913-310 (udev-worker)[265]: sda14: Process '/usr/bin/unshare -m /usr/bin/snap auto-import --mount=/dev/sda14' failed with exit code 1.
+fv-az1913-310 (udev-worker)[263]: sda15: Process '/usr/bin/unshare -m /usr/bin/snap auto-import --mount=/dev/sda15' failed with exit code 1.
+fv-az1913-310 (udev-worker)[261]: sdb1: Process '/usr/bin/unshare -m /usr/bin/snap auto-import --mount=/dev/sdb1' failed with exit code 1.
+fv-az1913-310 (udev-worker)[257]: sda1: Process '/usr/bin/unshare -m /usr/bin/snap auto-import --mount=/dev/sda1' failed with exit code 1.
+fv-az1913-310 systemd[1]: apport-autoreport.path - Process error reports when automatic reporting is enabled (file watch) was skipped because of an unmet condition check (ConditionPathExists=/var/lib/apport/autoreport).
+fv-az1913-310 systemd[1]: apport-autoreport.timer - Process error reports when automatic reporting is enabled (timer based) was skipped because of an unmet condition check (ConditionPathExists=/var/lib/apport/autoreport).
+fv-az1913-310 systemd[1]: Started update-notifier-download.timer - Download data for packages that failed at package install time.
+fv-az1913-310 systemd[1]: Starting grub-initrd-fallback.service - GRUB failed boot detection...
+fv-az1913-310 systemd[1]: Finished grub-initrd-fallback.service - GRUB failed boot detection.
+fv-az1913-310 containerd[909]: time="2025-03-30T08:14:58Z" level=warning msg="containerd config version `1` has been deprecated and will be converted on each startup in containerd v2.0, use `containerd config migrate` after upgrading to containerd 2.0 to avoid conversion on startup"
+fv-az1913-310 containerd[909]: time="2025-03-30T08:14:59.036019003Z" level=info msg="skip loading plugin \"io.containerd.snapshotter.v1.aufs\"..." error="aufs is not supported (modprobe aufs failed: exit status 1 \"modprobe: FATAL: Module aufs not found in directory /lib/modules/6.8.0-1021-azure\\n\"): skip plugin" type=io.containerd.snapshotter.v1
+fv-az1913-310 containerd[909]: time="2025-03-30T08:14:59.036379439Z" level=info msg="loading plugin \"io.containerd.warning.v1.deprecations\"..." type=io.containerd.warning.v1
+fv-az1913-310 containerd[909]: time="2025-03-30T08:14:59.037217889Z" level=info msg="skip loading plugin \"io.containerd.snapshotter.v1.blockfile\"..." error="no scratch file generator: skip plugin" type=io.containerd.snapshotter.v1
+fv-az1913-310 containerd[909]: time="2025-03-30T08:14:59.037407865Z" level=info msg="skip loading plugin \"io.containerd.snapshotter.v1.btrfs\"..." error="path /var/lib/containerd/io.containerd.snapshotter.v1.btrfs (ext4) must be a btrfs filesystem to be used with the btrfs snapshotter: skip plugin" type=io.containerd.snapshotter.v1
+fv-az1913-310 containerd[909]: time="2025-03-30T08:14:59.037440717Z" level=info msg="skip loading plugin \"io.containerd.snapshotter.v1.devmapper\"..." error="devmapper not configured: skip plugin" type=io.containerd.snapshotter.v1
+fv-az1913-310 containerd[909]: time="2025-03-30T08:14:59.039936952Z" level=info msg="skip loading plugin \"io.containerd.snapshotter.v1.zfs\"..." error="path /var/lib/containerd/io.containerd.snapshotter.v1.zfs must be a zfs filesystem to be used with the zfs snapshotter: skip plugin" type=io.containerd.snapshotter.v1
+fv-az1913-310 containerd[909]: time="2025-03-30T08:14:59.046651890Z" level=info msg="skip loading plugin \"io.containerd.tracing.processor.v1.otlp\"..." error="skip plugin: tracing endpoint not configured" type=io.containerd.tracing.processor.v1
+fv-az1913-310 containerd[909]: time="2025-03-30T08:14:59.046689050Z" level=info msg="skip loading plugin \"io.containerd.internal.v1.tracing\"..." error="skip plugin: tracing endpoint not configured" type=io.containerd.internal.v1
+fv-az1913-310 systemd[1]: Starting ephemeral-disk-warning.service - Write warning to Azure ephemeral disk...
+fv-az1913-310 systemd[1]: Finished ephemeral-disk-warning.service - Write warning to Azure ephemeral disk.
+fv-az1913-310 networkd-dispatcher[821]: WARNING:Unknown index 3 seen, reloading interface list
+fv-az1913-310 dockerd[1162]: time="2025-03-30T08:15:00.085678300Z" level=warning msg="Not using native diff for overlay2, this may cause degraded performance for building images: kernel has CONFIG_OVERLAY_FS_REDIRECT_DIR enabled" storage-driver=overlay2
+fv-az1913-310 python3[853]: 2025-03-30T08:15:11.597943Z WARNING Daemon Daemon VM is provisioned, but the VM unique identifier has changed -- clearing cached state
+fv-az1913-310 python3[853]: WARNING! Cached DHCP leases will be deleted.
+fv-az1913-310 python3[1466]: 2025-03-30T08:15:18.210219Z INFO ExtHandler ExtHandler [HEARTBEAT] Agent WALinuxAgent-2.12.0.2 is running as the goal state agent [DEBUG HeartbeatCounter: 0;HeartbeatId: F1FB32E2-78C8-47FE-9DBB-ACE59152F793;DroppedPackets: 0;UpdateGSErrors: 0;AutoUpdate: 1;UpdateMode: SelfUpdate;]

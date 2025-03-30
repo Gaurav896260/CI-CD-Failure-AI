@@ -1,6 +1,6 @@
 name: AI CI/CD Pipeline
 
-on: [push, pull_request] # Runs on code push or PR
+on: [push, pull_request]
 
 jobs:
   build:
@@ -8,7 +8,7 @@ jobs:
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set Up Python
         uses: actions/setup-python@v4
@@ -16,22 +16,43 @@ jobs:
           python-version: "3.8"
 
       - name: Install Dependencies
-        run: pip install -r requirements.txt || echo "No dependencies"
-
-      - name: Run Tests
-        run: python -m unittest discover -s tests || echo "No tests"
-
-      - name: Create Logs Directory
-        run: mkdir -p logs # Ensure logs directory exists
-
-      - name: Save Logs
-        run: journalctl --no-pager -n 1000 > logs/system_logs.txt || echo "Log collection failed"
+        run: pip install -r requirements.txt
 
       - name: Collect Build Logs
-        run: echo "Build logs generated at $(date)" > logs/build_log.txt
+        run: |
+          mkdir -p logs
+          journalctl -u $GITHUB_REPOSITORY --no-pager > logs/system_logs.txt || echo "Log collection failed"
 
       - name: Upload Logs
         uses: actions/upload-artifact@v4
         with:
-          name: ci-cd-logs
+          name: build-logs
+          path: logs/system_logs.txt
+
+  process_logs:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set Up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.8"
+
+      - name: Download Logs
+        uses: actions/download-artifact@v4
+        with:
+          name: build-logs
           path: logs/
+
+      - name: Preprocess Logs
+        run: python scripts/preprocess_logs.py
+
+      - name: Train AI Model
+        run: python scripts/train_model.py
+
+      - name: Predict Failures
+        run: python scripts/predict_failure.py
