@@ -1,29 +1,28 @@
-import re
 import os
 
-def clean_log(log_file, output_file):
-    cleaned_lines = []
+input_log_file = "logs/system_logs.txt"
+output_log_file = "logs/cleaned_logs.txt"
 
-    with open(log_file, "r", encoding="utf-8") as f:
-        for line in f:
-            # Remove timestamps (e.g., "Mar 30 08:18:45")
-            line = re.sub(r"\w{3} \d{1,2} \d{2}:\d{2}:\d{2}", "", line)
+# Ensure input file exists
+if not os.path.exists(input_log_file):
+    raise FileNotFoundError(f"❌ Log file not found: {input_log_file}")
 
-            # Keep only important log messages
-            if "error" in line.lower() or "failed" in line.lower() or "warning" in line.lower():
-                cleaned_lines.append(line.strip())
+# Read logs
+with open(input_log_file, "r", encoding="utf-8") as f:
+    logs = f.readlines()
 
-    with open(output_file, "w", encoding="utf-8") as f:
-        for line in cleaned_lines:
-            f.write(line + "\n")
+# Filter logs (only keep error or failure messages)
+cleaned_logs = [log.strip() for log in logs if "error" in log.lower() or "failed" in log.lower()]
 
-    print(f"✅ Cleaned log saved to {output_file}")
+# Debugging: Print logs found
+print(f"🔍 Found {len(cleaned_logs)} relevant logs.")
 
-# Run the script
-log_file = "logs/system_logs.txt"  # Path to raw log
-output_file = "logs/cleaned_logs.txt"  # Output cleaned log
+# Ensure logs are not empty
+if not cleaned_logs:
+    raise ValueError("❌ No relevant logs found! Log file may be incomplete.")
 
-if os.path.exists(log_file):
-    clean_log(log_file, output_file)
-else:
-    print(f"❌ Log file {log_file} not found.")
+# Save cleaned logs
+with open(output_log_file, "w", encoding="utf-8") as f:
+    f.writelines("\n".join(cleaned_logs))
+
+print(f"✅ Cleaned logs saved to {output_log_file}")
