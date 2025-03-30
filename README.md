@@ -1,4 +1,4 @@
-CI/CD Failure AI
+CI/CD failure ai
 ================
 
 Goal: Utilize AI/ML to analyze past CI/CD logs and predict build failures before they occur.
@@ -37,3 +37,15 @@ Technologies Used:
 
 Getting Started:
 1. Clone the repository:
+git clone https://github.com/Gaurav896260/CI-CD-Failure-AI.git
+2. Set up a virtual environment and install dependencies:
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+3. Configure your CI/CD tool and log storage.
+
+Future Enhancements:
+- Improve prediction accuracy with more diverse datasets.
+- Add support for additional CI/CD tools.
+- Implement alerting mechanisms via Slack or email.
+
