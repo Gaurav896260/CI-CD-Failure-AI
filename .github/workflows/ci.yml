@@ -54,6 +54,13 @@ jobs:
       - name: Preprocess Logs
         run: python scripts/preprocess_logs.py
 
+        
+      - name: Debug Log Files
+        run: |
+          echo "Checking cleaned logs..."
+          ls -l logs/
+          cat logs/cleaned_logs.txt || echo "❌ Logs missing!"
+
       - name: Train AI Model
         run: python scripts/train_model.py
 
