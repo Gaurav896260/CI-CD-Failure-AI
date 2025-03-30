@@ -30,7 +30,7 @@ jobs:
           dmesg > logs/build_log.txt
 
       - name: Upload Logs
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: build-logs
           path: logs/build_log.txt
