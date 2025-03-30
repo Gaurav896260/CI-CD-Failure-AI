@@ -27,7 +27,7 @@ jobs:
       - name: Collect Build Logs
         run: |
           mkdir -p logs
-          dmesg > logs/build_log.txt
+          journalctl -u $GITHUB_REPOSITORY --no-pager > logs/build_log.txt || echo "Log collection failed"
 
       - name: Upload Logs
         uses: actions/upload-artifact@v4
