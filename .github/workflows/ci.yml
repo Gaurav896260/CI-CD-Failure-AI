@@ -1,6 +1,6 @@
 name: AI CI/CD Pipeline
 
-on: [push, pull_request] # Runs when code is pushed
+on: [push, pull_request] # Runs on code push or PR
 
 jobs:
   build:
@@ -21,16 +21,17 @@ jobs:
       - name: Run Tests
         run: python -m unittest discover -s tests || echo "No tests"
 
+      - name: Create Logs Directory
+        run: mkdir -p logs # Ensure logs directory exists
+
       - name: Save Logs
-        run: dmesg > cicd_logs.txt || echo "Log collection failed"
+        run: journalctl --no-pager -n 1000 > logs/system_logs.txt || echo "Log collection failed"
 
       - name: Collect Build Logs
-        run: |
-          mkdir -p logs
-          journalctl -u $GITHUB_REPOSITORY --no-pager > logs/build_log.txt || echo "Log collection failed"
+        run: echo "Build logs generated at $(date)" > logs/build_log.txt
 
       - name: Upload Logs
         uses: actions/upload-artifact@v4
         with:
-          name: build-logs
-          path: logs/build_log.txt
+          name: ci-cd-logs
+          path: logs/
