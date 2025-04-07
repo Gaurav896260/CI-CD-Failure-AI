@@ -42,8 +42,15 @@ if X.shape[1] == 0:
 
 y = np.array([1 if label == "Failure" else 0 for label in df["label"]])
 
-# Train-test split
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+# Train-test split (safe version)
+if len(y) < 2:
+    print("⚠️ Not enough data to split — training on full dataset.")
+    X_train, y_train = X, y
+    X_test, y_test = X, y
+else:
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.2, random_state=42
+    )
 
 # Train model
 model = RandomForestClassifier(n_estimators=100, random_state=42)
