@@ -28,7 +28,6 @@ jobs:
         with:
           name: build-logs
           path: logs/system_logs.txt
-
   process_logs:
     needs: build
     runs-on: ubuntu-latest
@@ -42,24 +41,26 @@ jobs:
         with:
           python-version: "3.8"
 
-      - name: Install Dependencies
-        run: pip install -r requirements.txt
-
       - name: Download Logs
         uses: actions/download-artifact@v4
         with:
           name: build-logs
           path: logs/
 
+      - name: Debug Logs After Download
+        run: |
+          echo "🔍 Checking logs before preprocessing..."
+          ls -l logs/
+          cat logs/system_logs.txt || echo "❌ No system logs found!"
+
       - name: Preprocess Logs
         run: python scripts/preprocess_logs.py
 
-        
-      - name: Debug Log Files
+      - name: Debug Cleaned Logs
         run: |
-          echo "Checking cleaned logs..."
+          echo "🔍 Checking cleaned logs after preprocessing..."
           ls -l logs/
-          cat logs/cleaned_logs.txt || echo "❌ Logs missing!"
+          cat logs/cleaned_logs.txt || echo "❌ Cleaned logs are empty!"
 
       - name: Train AI Model
         run: python scripts/train_model.py
