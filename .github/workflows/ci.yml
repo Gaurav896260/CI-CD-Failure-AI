@@ -21,13 +21,17 @@ jobs:
       - name: Collect Build Logs
         run: |
           mkdir -p logs
-          journalctl -u $GITHUB_REPOSITORY --no-pager > logs/system_logs.txt || echo "Log collection failed"
+          echo "🔧 Simulating build logs (since journalctl may not work on GitHub Actions)"
+          echo "Build started..." > logs/system_logs.txt
+          echo "Compilation failed due to error XYZ" >> logs/system_logs.txt
+          echo "Build finished with failure" >> logs/system_logs.txt
 
       - name: Upload Logs
         uses: actions/upload-artifact@v4
         with:
           name: build-logs
           path: logs/system_logs.txt
+
   process_logs:
     needs: build
     runs-on: ubuntu-latest
@@ -41,17 +45,21 @@ jobs:
         with:
           python-version: "3.8"
 
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+
       - name: Download Logs
         uses: actions/download-artifact@v4
         with:
           name: build-logs
           path: logs/
 
-      - name: Debug Logs After Download
+      - name: Check Downloaded Logs
         run: |
-          echo "🔍 Checking logs before preprocessing..."
+          echo "📁 Listing files in logs/"
           ls -l logs/
-          cat logs/system_logs.txt || echo "❌ No system logs found!"
+          echo "📜 system_logs.txt content:"
+          cat logs/system_logs.txt || echo "❌ system_logs.txt missing or empty!"
 
       - name: Preprocess Logs
         run: python scripts/preprocess_logs.py
